@@ -1,0 +1,95 @@
+<%- include('../header.ejs')  %>
+
+<br><br><br>
+
+<h1 class="mt-5">Edit course</h1>
+
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="/courseupdate/<%= d._id %>" method="post">
+                <div class="mb-3">
+                    <label for="">name</label>
+                    <input type="text" value="<%= d.name %>" name="name" id="" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="">email</label>
+                    <input type="email" value="<%= d.email %>" name="email" id="" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="">Phone no</label>
+                    <input type="number" value="<%= d.phone %>" name="mobile" id="" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="">D.O.B</label>
+                    <input type="date" name="dob" value=" <%= d.dob %>" id="" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label for="" class="mb-2">Gender:</label><br>
+                    <input type="radio" name="gender" value="male" <%= d.gender='male'?'checked':'' %>> male &nbsp;
+                    <input type="radio" name="femail" value="female" <%= d.gender='femail'?'checked':'' %>> femail &nbsp;
+                </div>
+
+                <div class="mb-3">
+                    <label for="">Address:</label>
+                    <textarea name="address" class="form-control" id=""><%= d.address %></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="">Select Collage:</label>
+                    <select name="collage" class="form-control" id="">
+                        <option value="">Select</option>
+                        <option value="" <%= d.collage='MITS'?'selected':'' %>>MITS</option>
+                        <option value="" <%= d.collage='RJIT'?'selected':'' %>>RJIT</option>
+                        <option value="" <%= d.collage='ITM'?'selected':'' %>>ITM</option>
+                        <option value="" <%= d.collage='NITM'?'selected':'' %>>NITM</option>
+                        <option value="" <%= d.collage='IIT'?'selected':'' %>>IIT</option>
+                    </select>
+                </div>
+
+
+
+                <div class="mb-3">
+                    <label for="">Select Course:</label>
+                    <select name="course" id="">
+                        <option value="">Select</option>
+                        <option value="" <%= d.course = 'BCA' ? 'selected':'' %>>BCA</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="">Select Branch:</label>
+                    <select name="branch" id="">
+                        <option value="">select</option>
+                        <option value="">CSE</option>
+                        <option value="">IT</option>
+                        <option value="">EC</option>
+                        <option value="">ET</option>
+                        <option value="">ME</option>
+                        <option value="">EE</option>
+                    </select>
+                </div>
+
+
+
+
+
+                <button type="submit">Update</button>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+        
+   
+</div>
+</div>
+
+
+
+
+<%- include('../footer.ejs')  %>

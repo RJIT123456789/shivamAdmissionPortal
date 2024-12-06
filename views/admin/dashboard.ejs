@@ -1,0 +1,61 @@
+<%- include('../header.ejs')  %>
+
+
+
+
+<br><br><br>
+
+<h1 class="mt-5">Display course</h1>
+
+<div class="container mt-5">
+    <div class="row">
+        
+    <table class="table table-bordered">
+        <tr>
+            <th>s.no</th>
+            <th>name</th>
+            <th>email</th>
+            <th>phone</th>
+            <th>Status</th>
+            <th>Comment</th>
+            <th></th>
+            <th>action</th>
+        </tr>
+
+
+        <% i = 1 %>
+        <%c.forEach((ca) => { %>
+            <tr> 
+                <td><%= i++%></td>
+                <td><%= ca.name %></td>
+                <td><%= ca.email %></td>
+                <td><%= ca.phone %></td>
+                <td><%= ca.status %></td>
+                <td>
+                    <form action="/update_approve/<%= ca._id %>" method="post">
+                    <textarea name="comment" id=""></textarea>  
+                </td>
+                <td>
+                    <button class="btn btn-info" type="submit" name="status" value="approved">Approved</button>
+                    <button class="btn btn-info" type="submit" name="status" value="rejected">Rejected</button>
+                    
+            </form>
+                </td>
+                <td>
+                    <a href="/view/<%= ca._id %>" class="btn btn-info">view</a>
+                    <a href="/delete/<%= ca._id %>" class="btn btn-danger">delete</a>   
+                </td>
+            </tr>
+       <% }) %>
+            
+    </table>
+</div>
+</div>
+
+
+
+
+
+
+
+<%- include('../footer.ejs') %>
