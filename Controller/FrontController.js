@@ -9,7 +9,7 @@ cloudinary.config({
   cloud_name: 'dywtkd0yd',
   api_key: '167237687329664',
   api_secret: 'fL8UMO5HJjCKJfazC9RmT5u4FX4',
-  secure: false,
+  // secure: false,
 })
 
 class FrontController {
@@ -74,7 +74,6 @@ class FrontController {
     }
   };
 
-
   static insertuser = async (req, res) => {
     try {
       //console.log(req.files.images)
@@ -122,8 +121,6 @@ class FrontController {
       console.log(error);
     }
   };
-
-
 
   static verifylogin = async (req, res) => {
     try {
@@ -225,33 +222,39 @@ class FrontController {
       // const transformname = name.toUpperCase()
       // res.render('profile', { n: transformname, i: image.url, m: mob, e: email })
       // console.log(req.files.image)
-      if (req.files) {
-        const user = await UserModal.findById(req.user.id);
-        const image_id = user.image.public_id;
-        await cloudinary.uploader.destroy(image_id);
+      const { id } = req.user;
+      const { name, email } = req.body
 
-        const file = req.file.image;
-        const myimage = await cloudinary.uploader.upload(file.tempFilePath, {
+      if (req.files) {
+        const user = await UserModal.findById(id);
+        const imageId = user.image.public_id;
+        await cloudinary.uploader.destroy(imageId);
+
+        const imagefile = req.files.image;
+        const imageUpload = await cloudinary.uploader.upload(imagefile.tempFilePath, {
           folder: "userprofile",
         });
-        let data = {
-          name: req.body.name,
-          email: req.body.email,
+        // console.log(image);
+        var data = {
+          name: name,
+          email:email,
           image: {
-            public_id: myimage.public_id,
-            url: myimage.secure_url,
+            public_id: imageUpload.public_id,
+            url: imageUpload.secure_url,
           },
         };
 
       }
       else {
         var data = {
-          name: req.body.name,
-          email: req.body.email,
-
+          name: name,
+          email: email,
         };
       }
-      const updateprofile = await UserModal.findByIdAndUpdate(req.user.id, data);
+      
+      // const updateprofile = await UserModal.findByIdAndUpdate(req.user.id, data);
+      await UserModal.findByIdAndUpdate(id, data);
+
       res.redirect('/profile')
     } catch (error) {
       console.log(error);

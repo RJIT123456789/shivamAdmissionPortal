@@ -6,6 +6,8 @@ const router = express.Router();
 const CheckUserAuth = require('../Middleware/auth');
 const islogin = require('../Middleware/isLogin');
 const AdminController = require('../Controller/Admin.js/AdminController');
+const ContactContraller = require('../Controller/Admin.js/ContactController');
+
 
 
 // router.get('/',islogin,FrontController.login)
@@ -24,6 +26,13 @@ router.get('/logout', CheckUserAuth, FrontController.logout)
 router.get('/profile', CheckUserAuth, FrontController.profile)
 router.post('/changepassword', CheckUserAuth, FrontController.changePassword)
 router.post('/changeprofile', CheckUserAuth, FrontController.updateprofile)
+//-------------------------------------
+// router.get('/contact', CheckUserAuth, )
+router.post('/courseinsert',CheckUserAuth,ContactContraller.contactinsect)
+router.get('/contactDisplay',CheckUserAuth,ContactContraller.contactDisplay)
+
+
+
 
 
 // action
@@ -39,7 +48,7 @@ router.get('/admin/view/:id', CheckUserAuth, AdminController.view)
 router.get('/delete/:id', CheckUserAuth, AdminController.delete)
 router.post('/update_approve/:id', CheckUserAuth, AdminController.update_approve)
 
-
+// router.get("/verify",FrontController.verifyMail)
 
 
 
